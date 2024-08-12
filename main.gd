@@ -7,7 +7,7 @@ var model = "gemini-1.5-flash"
 var response_text:
 	set(value):
 		response_text = value
-		print(value)
+		$Label.text = value
 
 var conversation: Array[Dictionary]
 
@@ -15,10 +15,7 @@ func _ready() -> void:
 
 	conversation = []
 
-	await ask("remember this: apple")
-	await ask("what was everything i told you to remember")
-	await ask("now remember my cat's name: alexa")
-	await ask("now, what was everything i told you to remember")
+
 
 
 func ask(prompt: String) -> void:
@@ -86,3 +83,7 @@ func ask(prompt: String) -> void:
 func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
 		var data = JSON.parse_string(body.get_string_from_utf8())
 		response_text = data["candidates"][0]["content"]["parts"][0]["text"]
+
+
+func _on_line_edit_text_submitted(new_text):
+	await ask(new_text)
