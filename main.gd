@@ -90,9 +90,6 @@ func ask(prompt: String) -> void:
 		)
 
 
-
-
-
 func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
 		var data = JSON.parse_string(body.get_string_from_utf8())
 		FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
@@ -103,7 +100,7 @@ func _on_line_edit_text_submitted(new_text: String):
 	if new_text.is_empty():
 		return
 	$MainBody/LineEdit.text = ""
-	add_message(false, new_text)
+	add_message(false, new_text + "\n")
 
 	await ask(new_text)
 

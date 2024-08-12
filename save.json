@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "*This is an italic test!* \n\nIt worked!  You successfully used italics. \n\nLet me know if you have any other formatting questions. \n"
+            "text": "Please provide me with the big text you want me to analyze. I need the text itself to help you. \n\nFor example, tell me:\n\n* **What is the text about?** (e.g., a news article, a poem, a scientific paper)\n* **What do you want me to do with it?** (e.g., summarize it, translate it, find key themes, identify errors)\n\nI'm ready to help! \n"
           }
         ],
         "role": "model"
@@ -32,8 +32,8 @@
     }
   ],
   "usageMetadata": {
-    "promptTokenCount": 86,
-    "candidatesTokenCount": 31,
-    "totalTokenCount": 117
+    "promptTokenCount": 4,
+    "candidatesTokenCount": 96,
+    "totalTokenCount": 100
   }
 }
