@@ -4,11 +4,26 @@ extends Control
 @export var secrets: Secrets
 var model = "gemini-1.5-flash"
 
-var response_text
+var response_text:
+	set(value):
+		print(value)
+
+var conversation: Array[Dictionary]
 
 func _ready() -> void:
-	await ask("Hello")
-	print(response_text)
+
+	conversation = \
+		[{"role": "user",
+			"parts":[{
+				"text": "Remember this: Banana"}]},
+		{"role": "model",
+			"parts":[{
+				"text": "Ok, I'll remember the following word: Banana."}]}]
+
+
+
+	await ask("what did i tell you to remember")
+	#print(response_text)
 
 
 func ask(prompt: String) -> void:
@@ -16,8 +31,10 @@ func ask(prompt: String) -> void:
 			"https://generativelanguage.googleapis.com/v1beta/models/" \
 			+ model + ":generateContent?key=" + secrets.api_key
 
+
+
 	var content = {
-		"contents": [{
+		"contents": conversation + [{
 			"role": "user",
 
 			"parts": [{
@@ -50,8 +67,6 @@ func ask(prompt: String) -> void:
 
 	var headers = ["Content-Type: application/json"]
 
-	#var response_text := ""
-
 	request.request_completed.connect(
 			func(_r, _r_code, _h, body: PackedByteArray):
 				var data = JSON.parse_string(body.get_string_from_utf8())
@@ -60,10 +75,3 @@ func ask(prompt: String) -> void:
 	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(content))
 
 	await request.request_completed
-
-	#return response_text
-
-
-
-
-
