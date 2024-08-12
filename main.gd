@@ -4,17 +4,19 @@ extends Control
 @export var secrets: Secrets
 var model = "gemini-1.5-flash"
 
+var response_text
 
 func _ready() -> void:
-	ask("Hello")
+	await ask("Hello")
+	print(response_text)
 
 
-func ask(prompt: String) -> String :
+func ask(prompt: String) -> void:
 	var url = \
 			"https://generativelanguage.googleapis.com/v1beta/models/" \
 			+ model + ":generateContent?key=" + secrets.api_key
 
-	var body = {
+	var content = {
 		"contents": [{
 			"role": "user",
 
@@ -46,22 +48,22 @@ func ask(prompt: String) -> String :
 		  ]
 		}
 
-	#var headers = PackedStringArray(["contents: [{'role': 'user', 'parts': [{'text': " + prompt + "}]}]"])
-	#print(JSON.stringify(body))
 	var headers = ["Content-Type: application/json"]
-	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(body))
-	request.request_completed.connect(_on_http_request_request_completed)
 
-	return ""
+	#var response_text := ""
+
+	request.request_completed.connect(
+			func(_r, _r_code, _h, body: PackedByteArray):
+				var data = JSON.parse_string(body.get_string_from_utf8())
+				response_text = data["candidates"][0]["content"]["parts"][0]["text"])
+
+	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(content))
+
+	await request.request_completed
+
+	#return response_text
 
 
-func _on_http_request_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-	if true:
-		print("Result: ", result)
-		print("Code: ", response_code)
-		print("Headers: ", headers)
-		var data = JSON.parse_string(body.get_string_from_utf8())
-		var text = data["candidates"][0]["content"]["parts"][0]["text"]
-		print("Data: ", text)
 
-		FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
+
+
