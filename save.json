@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "I'm glad I could be helpful!  Is there anything else you'd like to know about lemons, or maybe something else entirely? I'm always happy to chat! \n"
+            "text": "**bold text** normal \n"
           }
         ],
         "role": "model"
@@ -32,8 +32,8 @@
     }
   ],
   "usageMetadata": {
-    "promptTokenCount": 353,
-    "candidatesTokenCount": 38,
-    "totalTokenCount": 391
+    "promptTokenCount": 6,
+    "candidatesTokenCount": 5,
+    "totalTokenCount": 11
   }
 }

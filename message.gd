@@ -1,6 +1,6 @@
 extends PanelContainer
 
-@onready var label: Label = %Label
+@onready var label: RichTextLabel = %Label
 @onready var panel: Panel = %Panel
 
 var bot: bool

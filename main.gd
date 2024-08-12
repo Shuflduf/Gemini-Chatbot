@@ -1,5 +1,6 @@
 extends Control
 
+@onready var md_bb: MDtoBB = $MDtoBB
 @onready var request: HTTPRequest = $HTTPRequest
 @export var secrets: Secrets
 @export var message: PackedScene
@@ -13,15 +14,18 @@ var response_text:
 var conversation: Array[Dictionary]
 
 func _ready() -> void:
-
 	conversation = []
+
+
+
 
 func add_message(bot: bool, message_text: String):
 	var new_message: Control = message.instantiate()
 	new_message.bot = bot
 	%Messages.add_child(new_message)
 
-	new_message.label.text = message_text
+
+	new_message.label.text = md_bb.md_to_bb(message_text)
 
 	scroll_down()
 
@@ -95,7 +99,9 @@ func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) 
 		response_text = data["candidates"][0]["content"]["parts"][0]["text"]
 
 
-func _on_line_edit_text_submitted(new_text):
+func _on_line_edit_text_submitted(new_text: String):
+	if new_text.is_empty():
+		return
 	$MainBody/LineEdit.text = ""
 	add_message(false, new_text)
 
