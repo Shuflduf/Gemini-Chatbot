@@ -60,7 +60,8 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		print("Result: ", result)
 		print("Code: ", response_code)
 		print("Headers: ", headers)
-		#var data = body.decode_var(0)
-		#print("Data: ", data)
-		print("Body: ", body)
-		FileAccess.open("save.html", FileAccess.WRITE).store_buffer(body)
+		var data = JSON.parse_string(body.get_string_from_utf8())
+		var text = data["candidates"][0]["content"]["parts"][0]["text"]
+		print("Data: ", text)
+
+		FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
