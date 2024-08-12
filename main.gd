@@ -47,8 +47,9 @@ func ask(prompt: String) -> String :
 		}
 
 	#var headers = PackedStringArray(["contents: [{'role': 'user', 'parts': [{'text': " + prompt + "}]}]"])
-	#print(str(body))
-	request.request(url, [{"Content-Type": "application/json"}], HTTPClient.METHOD_GET, str(body))
+	#print(JSON.stringify(body))
+	var headers = ["Content-Type: application/json"]
+	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(body))
 	request.request_completed.connect(_on_http_request_request_completed)
 
 	return ""
