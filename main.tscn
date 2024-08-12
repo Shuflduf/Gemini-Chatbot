@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://rdkn0t7jppmy"]
+[gd_scene load_steps=4 format=3 uid="uid://rdkn0t7jppmy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
 [ext_resource type="Resource" uid="uid://df00irgkl8kqq" path="res://my_secrets.tres" id="2_pxsef"]
+[ext_resource type="PackedScene" uid="uid://bkfwlrruq0vvx" path="res://message.tscn" id="3_4a3wp"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,36 +13,52 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w5wk0")
 secrets = ExtResource("2_pxsef")
+message = ExtResource("3_4a3wp")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
-[node name="LineEdit" type="LineEdit" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -280.0
-offset_top = -73.0
-offset_right = 280.0
-offset_bottom = -42.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -255.0
-offset_top = -11.0
-offset_right = 255.0
-offset_bottom = 12.0
+offset_right = -530.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Messages" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Message" parent="MarginContainer/ScrollContainer/Messages" instance=ExtResource("3_4a3wp")]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="HBoxContainer" parent="MarginContainer/ScrollContainer/Messages/Message" index="0"]
+size_flags_horizontal = 8
+
+[node name="Label" parent="MarginContainer/ScrollContainer/Messages/Message/HBoxContainer" index="1"]
+text = "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
-[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="MarginContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+
+[editable path="MarginContainer/ScrollContainer/Messages/Message"]

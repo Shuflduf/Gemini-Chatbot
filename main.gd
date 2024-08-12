@@ -2,12 +2,13 @@ extends Control
 
 @onready var request: HTTPRequest = $HTTPRequest
 @export var secrets: Secrets
+@export var message: PackedScene
 var model = "gemini-1.5-flash"
 
 var response_text:
 	set(value):
 		response_text = value
-		$Label.text = value
+		add_message(true, value)
 
 var conversation: Array[Dictionary]
 
@@ -15,7 +16,11 @@ func _ready() -> void:
 
 	conversation = []
 
-
+func add_message(bot, message_text):
+	var new_message = message.instantiate()
+	%Messages.add_child(new_message)
+	new_message.bot = bot
+	new_message.label.text = message_text
 
 
 func ask(prompt: String) -> void:
@@ -87,3 +92,5 @@ func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) 
 
 func _on_line_edit_text_submitted(new_text):
 	await ask(new_text)
+	$MarginContainer/LineEdit.text = ""
+	add_message(false, new_text)
