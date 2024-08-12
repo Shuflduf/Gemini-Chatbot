@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "**bold text** normal \n"
+            "text": "*This is an italic test!* \n\nIt worked!  You successfully used italics. \n\nLet me know if you have any other formatting questions. \n"
           }
         ],
         "role": "model"
@@ -32,8 +32,8 @@
     }
   ],
   "usageMetadata": {
-    "promptTokenCount": 6,
-    "candidatesTokenCount": 5,
-    "totalTokenCount": 11
+    "promptTokenCount": 86,
+    "candidatesTokenCount": 31,
+    "totalTokenCount": 117
   }
 }
