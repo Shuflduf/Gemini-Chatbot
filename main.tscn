@@ -14,3 +14,5 @@ script = ExtResource("1_w5wk0")
 secrets = ExtResource("2_vc3hu")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

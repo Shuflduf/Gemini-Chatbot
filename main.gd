@@ -6,24 +6,19 @@ var model = "gemini-1.5-flash"
 
 var response_text:
 	set(value):
+		response_text = value
 		print(value)
 
 var conversation: Array[Dictionary]
 
 func _ready() -> void:
 
-	conversation = \
-		[{"role": "user",
-			"parts":[{
-				"text": "Remember this: Banana"}]},
-		{"role": "model",
-			"parts":[{
-				"text": "Ok, I'll remember the following word: Banana."}]}]
+	conversation = []
 
-
-
-	await ask("what did i tell you to remember")
-	#print(response_text)
+	await ask("remember this: apple")
+	await ask("what was everything i told you to remember")
+	await ask("now remember my cat's name: alexa")
+	await ask("now, what was everything i told you to remember")
 
 
 func ask(prompt: String) -> void:
@@ -33,16 +28,21 @@ func ask(prompt: String) -> void:
 
 
 
-	var content = {
-		"contents": conversation + [{
+	conversation.append({
 			"role": "user",
 
 			"parts": [{
 				"text": prompt,
-			}],
+			}]}
+		)
 
-		}],
-		  "safety_settings": [
+	#print(conversation)
+
+
+	var content = {
+		"contents": conversation,
+
+		"safety_settings": [
 			{
 			  "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
 			  "threshold": "BLOCK_NONE"
@@ -67,11 +67,22 @@ func ask(prompt: String) -> void:
 
 	var headers = ["Content-Type: application/json"]
 
-	request.request_completed.connect(
-			func(_r, _r_code, _h, body: PackedByteArray):
-				var data = JSON.parse_string(body.get_string_from_utf8())
-				response_text = data["candidates"][0]["content"]["parts"][0]["text"])
-
 	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(content))
 
 	await request.request_completed
+
+	conversation.append({
+			"role": "model",
+
+			"parts": [{
+				"text": response_text,
+			}]}
+		)
+
+	#FileAccess.open("save.json", FileAccess.WRITE).store_string(str(conversation))
+
+
+
+func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
+		var data = JSON.parse_string(body.get_string_from_utf8())
+		response_text = data["candidates"][0]["content"]["parts"][0]["text"]
