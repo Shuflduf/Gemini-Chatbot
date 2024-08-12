@@ -16,19 +16,25 @@ func _ready() -> void:
 
 	conversation = []
 
-func add_message(bot, message_text):
-	var new_message = message.instantiate()
-	%Messages.add_child(new_message)
+func add_message(bot: bool, message_text: String):
+	var new_message: Control = message.instantiate()
 	new_message.bot = bot
+	%Messages.add_child(new_message)
+
 	new_message.label.text = message_text
 
+	scroll_down()
+
+func scroll_down():
+	await get_tree().process_frame
+	await get_tree().process_frame
+	%ScrollContainer.scroll_vertical = \
+			%ScrollContainer.get_v_scroll_bar().max_value
 
 func ask(prompt: String) -> void:
 	var url = \
 			"https://generativelanguage.googleapis.com/v1beta/models/" \
 			+ model + ":generateContent?key=" + secrets.api_key
-
-
 
 	conversation.append({
 			"role": "user",
@@ -37,8 +43,6 @@ func ask(prompt: String) -> void:
 				"text": prompt,
 			}]}
 		)
-
-	#print(conversation)
 
 
 	var content = {
@@ -81,16 +85,19 @@ func ask(prompt: String) -> void:
 			}]}
 		)
 
-	#FileAccess.open("save.json", FileAccess.WRITE).store_string(str(conversation))
+
 
 
 
 func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
 		var data = JSON.parse_string(body.get_string_from_utf8())
+		FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
 		response_text = data["candidates"][0]["content"]["parts"][0]["text"]
 
 
 func _on_line_edit_text_submitted(new_text):
-	await ask(new_text)
-	$MarginContainer/LineEdit.text = ""
+	$MainBody/LineEdit.text = ""
 	add_message(false, new_text)
+
+	await ask(new_text)
+

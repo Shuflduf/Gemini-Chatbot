@@ -1,1 +1,39 @@
-[{ "role": "user", "parts": [{ "text": "remember this: apple" }] }, { "role": "model", "parts": [{ "text": "I have remembered \"apple\".  Is there anything specific you\'d like me to do with this information? For example, would you like me to:\n\n* **Describe an apple?**\n* **Tell you a fact about apples?**\n* **Write a short story about an apple?**\n\nLet me know! \n" }] }, { "role": "user", "parts": [{ "text": "what was everything i told you to remember" }] }, { "role": "model", "parts": [{ "text": "You\'ve only told me to remember \"apple\" so far.  Is there anything else you\'d like me to remember? 😊 \n" }] }, { "role": "user", "parts": [{ "text": "now remember my cat\'s name: alexa" }] }, { "role": "model", "parts": [{ "text": "Okay, I\'ve now remembered \"apple\" and \"Alexa\" - your cat\'s name!  Is there anything else you\'d like me to store in my memory for you?  😊 \n" }] }, { "role": "user", "parts": [{ "text": "now, what was everything i told you to remember" }] }, { "role": "model", "parts": [{ "text": "You asked me to remember:\n\n1. **apple**\n2. **Alexa** (your cat\'s name) \n\nLet me know if there\'s anything else you\'d like me to keep in mind! 😊 \n" }] }]
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "I'm glad I could be helpful!  Is there anything else you'd like to know about lemons, or maybe something else entirely? I'm always happy to chat! \n"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0,
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "probability": "NEGLIGIBLE"
+        }
+      ]
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 353,
+    "candidatesTokenCount": 38,
+    "totalTokenCount": 391
+  }
+}
