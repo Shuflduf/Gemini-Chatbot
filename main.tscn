@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://rdkn0t7jppmy"]
+[gd_scene load_steps=3 format=3 uid="uid://rdkn0t7jppmy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
+[ext_resource type="Resource" uid="uid://brg17xeul0rbs" path="res://my_secrets.tres" id="2_vc3hu"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,5 +11,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w5wk0")
+secrets = ExtResource("2_vc3hu")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
