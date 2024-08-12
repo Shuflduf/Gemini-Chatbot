@@ -10,3 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_w5wk0")
+api_key = "AIzaSyBUAqn0gtFypiPmyJ7oDc3JbsA8WrylG50"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
