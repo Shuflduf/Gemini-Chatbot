@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://rdkn0t7jppmy"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
-[ext_resource type="Script" path="res://secrets.gd" id="2_2qk1t"]
-[ext_resource type="PackedScene" uid="uid://biydpo1sbys8r" path="res://message.tscn" id="3_4a3wp"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_w5wk0"]
+[ext_resource type="Script" path="res://scripts/secrets.gd" id="2_2qk1t"]
+[ext_resource type="PackedScene" uid="uid://biydpo1sbys8r" path="res://scenes/message.tscn" id="3_4a3wp"]
 [ext_resource type="FontFile" uid="uid://dr4ky20okhwgl" path="res://assets/fonts/Normal.ttf" id="4_m0urx"]
-[ext_resource type="PackedScene" uid="uid://b0srqe8c5pob6" path="res://session.tscn" id="4_qolas"]
-[ext_resource type="Script" path="res://MDtoBB.gd" id="4_utbt8"]
+[ext_resource type="PackedScene" uid="uid://b0srqe8c5pob6" path="res://scenes/session.tscn" id="4_qolas"]
+[ext_resource type="Script" path="res://scripts/MDtoBB.gd" id="4_utbt8"]
 [ext_resource type="FontFile" uid="uid://ckwie38c0g5xw" path="res://assets/fonts/Bold.ttf" id="7_t2few"]
-[ext_resource type="Shader" path="res://main.gdshader" id="8_06orj"]
+[ext_resource type="Shader" path="res://scenes/main.gdshader" id="8_06orj"]
 
 [sub_resource type="Resource" id="Resource_wju3u"]
 script = ExtResource("2_2qk1t")
@@ -61,8 +61,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 566.0
-offset_bottom = 62.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -122,7 +122,10 @@ size_flags_vertical = 0
 theme_override_constants/separation = 15
 alignment = 2
 
-[node name="LineEdit" type="LineEdit" parent="Control/MainBody/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MainBody/VBoxContainer"]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="Control/MainBody/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
@@ -130,6 +133,11 @@ size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_m0urx")
 theme_override_font_sizes/font_size = 20
+
+[node name="OpenSettings" type="Button" parent="Control/MainBody/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_m0urx")
+text = "Settings"
 
 [node name="MarginContainer" type="MarginContainer" parent="Control"]
 layout_mode = 2
@@ -161,6 +169,47 @@ theme_override_constants/separation = 15
 [node name="Session" parent="Control/MarginContainer/VBoxContainer/ScrollContainer/Sessions" instance=ExtResource("4_qolas")]
 layout_mode = 2
 
+[node name="Info" type="Window" parent="Control"]
+title = "Settings"
+initial_position = 1
+size = Vector2i(475, 100)
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Info"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Info/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_m0urx")
+bbcode_enabled = true
+text = "[center] Made by [url=https://github.com/Shuflduf/Gemini-Chatbot]Shuflduf[/url] on GitHub[/center]"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Info/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Info/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_m0urx")
+text = "Enter API Key  "
+
+[node name="SettingsLineEdit" type="LineEdit" parent="Control/Info/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(336.275, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_m0urx")
+secret = true
+
 [node name="Colour" type="Panel" parent="."]
 modulate = Color(0.3843, 0.45201, 0.61, 1)
 z_index = -100
@@ -186,5 +235,9 @@ mouse_filter = 2
 
 [connection signal="text_submitted" from="Control/ApiKeyPopup/VBoxContainer/APILineEdit" to="Control" method="_on_api_line_edit_text_submitted"]
 [connection signal="request_completed" from="Control/HTTPRequest" to="Control" method="_on_http_request_request_completed"]
-[connection signal="text_submitted" from="Control/MainBody/VBoxContainer/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="Control/MainBody/VBoxContainer/HBoxContainer/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Control/MainBody/VBoxContainer/HBoxContainer/OpenSettings" to="Control" method="_on_open_settings_pressed"]
 [connection signal="pressed" from="Control/MarginContainer/VBoxContainer/NewSession" to="Control" method="_on_new_session_pressed"]
+[connection signal="close_requested" from="Control/Info" to="Control" method="_on_info_close_requested"]
+[connection signal="meta_clicked" from="Control/Info/VBoxContainer/RichTextLabel" to="Control" method="_on_rich_text_label_meta_clicked"]
+[connection signal="text_submitted" from="Control/Info/VBoxContainer/HBoxContainer/SettingsLineEdit" to="Control" method="_on_settings_line_edit_text_submitted"]

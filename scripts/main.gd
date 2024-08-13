@@ -34,6 +34,14 @@ func _on_api_line_edit_text_submitted(new_text: String) -> void:
 	FileAccess.open("user://key", FileAccess.WRITE).store_string(new_text)
 	$ApiKeyPopup.hide()
 
+func _on_settings_line_edit_text_submitted(new_text: String) -> void:
+	if new_text.is_empty():
+		return
+
+	secrets = Secrets.new()
+	secrets.api_key = new_text
+	FileAccess.open("user://key", FileAccess.WRITE).store_string(new_text)
+	$Info.hide()
 
 func add_sessions() -> void:
 	for i in sessions.get_children():
@@ -166,7 +174,7 @@ func ask(prompt: String) -> void:
 
 func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
 	var data: Dictionary = JSON.parse_string(body.get_string_from_utf8())
-	FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
+	#FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
 
 	if data.has("error"):
 		response_text = \
@@ -205,4 +213,14 @@ func _on_new_session_pressed() -> void:
 	replace_all_messages(0)
 
 
+func _on_open_settings_pressed() -> void:
+	$Info/VBoxContainer/HBoxContainer/SettingsLineEdit.text = ""
+	$Info.show()
 
+
+func _on_info_close_requested() -> void:
+	$Info.hide()
+
+
+func _on_rich_text_label_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(str(meta))
