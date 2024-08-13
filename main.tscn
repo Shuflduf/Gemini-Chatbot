@@ -86,5 +86,8 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 15
 
+[node name="Session" parent="MarginContainer/ScrollContainer/Sessions" instance=ExtResource("4_qolas")]
+layout_mode = 2
+
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="text_submitted" from="MainBody/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]

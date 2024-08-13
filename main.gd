@@ -38,7 +38,7 @@ func ask(prompt: String) -> void:
 
 	if session == null:
 		session = session_scene.instantiate()
-		sessions.add_child(session)
+		sessions.add_child(session, true)
 
 
 	var url = \
@@ -79,7 +79,7 @@ func ask(prompt: String) -> void:
 			}
 		  ]
 		}
-
+	#print(content)
 	var headers = ["Content-Type: application/json"]
 
 	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(content))
