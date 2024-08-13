@@ -99,8 +99,11 @@ func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) 
 func _on_line_edit_text_submitted(new_text: String):
 	if new_text.is_empty():
 		return
-	$MainBody/LineEdit.text = ""
+	%LineEdit.text = ""
 	add_message(false, new_text + "\n")
 
 	await ask(new_text)
+
+
+
 

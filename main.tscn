@@ -32,14 +32,19 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="Messages" type="MarginContainer" parent="MainBody"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainBody"]
 layout_mode = 2
+alignment = 1
+
+[node name="Messages" type="MarginContainer" parent="MainBody/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 45
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MainBody/Messages"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainBody/VBoxContainer/Messages"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -47,7 +52,7 @@ follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="Messages" type="VBoxContainer" parent="MainBody/Messages/ScrollContainer"]
+[node name="Messages" type="VBoxContainer" parent="MainBody/VBoxContainer/Messages/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 2
@@ -55,7 +60,8 @@ size_flags_vertical = 0
 theme_override_constants/separation = 15
 alignment = 2
 
-[node name="LineEdit" type="LineEdit" parent="MainBody"]
+[node name="LineEdit" type="LineEdit" parent="MainBody/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 8
 
@@ -63,4 +69,4 @@ size_flags_vertical = 8
 script = ExtResource("4_utbt8")
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
-[connection signal="text_submitted" from="MainBody/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="MainBody/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
