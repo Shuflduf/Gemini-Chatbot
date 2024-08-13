@@ -58,7 +58,13 @@ func connect_sessions():
 		var c = sessions.get_child(i)
 
 		if !c.get_signal_connection_list("tree_exited"):
-			c.tree_exited.connect(connect_sessions)
+			#if sessions.get_child_count() <= 1:
+
+			c.tree_exited.connect(func():
+				for m in messages.get_children():
+					m.queue_free()
+
+				connect_sessions())
 
 		if c.get_signal_connection_list("loaded"):
 			c.disconnect("loaded", _connect_single_session)
