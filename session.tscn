@@ -9,3 +9,5 @@ script = ExtResource("1_61g11")
 layout_mode = 2
 text = "THINGY"
 horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

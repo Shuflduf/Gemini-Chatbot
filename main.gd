@@ -1,6 +1,8 @@
 extends Control
 
 @onready var sessions: VBoxContainer = %Sessions
+@onready var messages: VBoxContainer = %Messages
+
 @onready var md_bb: MDtoBB = $MDtoBB
 @onready var request: HTTPRequest = $HTTPRequest
 @export var secrets: Secrets
@@ -15,14 +17,37 @@ var response_text:
 
 var session: Session
 
-#func _ready() -> void:
-	#conversation = []
+func _ready() -> void:
+	add_sessions()
+
+func add_sessions() -> void:
+	for i in sessions.get_children():
+		i.free()
+
+	for i in DirAccess.get_files_at("user://sessions/"):
+		var new_session = session_scene.instantiate()
+		new_session.name = i.trim_suffix(".json")
+		new_session.conversation = \
+				JSON.parse_string(\
+				FileAccess.open("user://sessions/" + i, FileAccess.READ)\
+				.get_as_text())
+		sessions.add_child(new_session)
+
+	for i in sessions.get_child_count():
+		sessions.get_child(i).loaded.connect(func(): replace_all_messages(i))
+
+func replace_all_messages(index):
+	for i in messages.get_children():
+		i.free()
+
+	for i in sessions.get_child(index).conversation:
+		print(i["parts"])
 
 
 func add_message(bot: bool, message_text: String):
 	var new_message: Control = message.instantiate()
 	new_message.bot = bot
-	%Messages.add_child(new_message)
+	messages.add_child(new_message)
 
 	new_message.label.text = md_bb.md_to_bb(message_text)
 
@@ -79,7 +104,7 @@ func ask(prompt: String) -> void:
 			}
 		  ]
 		}
-	#print(content)
+
 	var headers = ["Content-Type: application/json"]
 
 	request.request(url, headers, HTTPClient.METHOD_POST, JSON.stringify(content))

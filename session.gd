@@ -1,17 +1,12 @@
 class_name Session
 extends PanelContainer
 
+signal loaded
 
 var conversation: Array = []
 
-#func _ready() -> void:
-	#var dict = {
-		#"role": "user",
-#
-		#"parts": [{
-			#"text": "HAHAH",
-	#}]}
-	#save_conv([dict])
+func _ready() -> void:
+	$Label.text = name
 
 
 func save_conv():
@@ -28,3 +23,9 @@ func load_conv() -> Array:
 
 func append(data: Dictionary):
 	conversation = load_conv() + [data]
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_mask == MOUSE_BUTTON_LEFT:
+			loaded.emit()
