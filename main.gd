@@ -18,9 +18,9 @@ var response_text:
 var session: Session
 
 func _ready() -> void:
-	secrets = Secrets.new()
+	#secrets = Secrets.new()
 	#if DirAccess.exi
-	if FileAccess.file_exists("user://key".get_base_dir()):
+	if FileAccess.file_exists("user://key"):
 		secrets.api_key = FileAccess.open("user://key", FileAccess.READ).get_as_text()
 	print(secrets.api_key)
 	if secrets.api_key.is_empty():
@@ -34,6 +34,7 @@ func _on_api_line_edit_text_submitted(new_text: String) -> void:
 
 	secrets = Secrets.new()
 	secrets.api_key = new_text
+	FileAccess.open("user://key", FileAccess.WRITE).store_string(new_text)
 	$ApiKeyPopup.hide()
 
 

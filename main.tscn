@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://rdkn0t7jppmy"]
+[gd_scene load_steps=9 format=3 uid="uid://rdkn0t7jppmy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
+[ext_resource type="Script" path="res://secrets.gd" id="2_2qk1t"]
 [ext_resource type="PackedScene" uid="uid://biydpo1sbys8r" path="res://message.tscn" id="3_4a3wp"]
 [ext_resource type="FontFile" uid="uid://dr4ky20okhwgl" path="res://assets/fonts/Normal.ttf" id="4_m0urx"]
 [ext_resource type="PackedScene" uid="uid://b0srqe8c5pob6" path="res://session.tscn" id="4_qolas"]
 [ext_resource type="Script" path="res://MDtoBB.gd" id="4_utbt8"]
 [ext_resource type="FontFile" uid="uid://ckwie38c0g5xw" path="res://assets/fonts/Bold.ttf" id="7_t2few"]
+
+[sub_resource type="Resource" id="Resource_wju3u"]
+script = ExtResource("2_2qk1t")
+api_key = ""
 
 [node name="Control" type="HBoxContainer"]
 anchors_preset = 15
@@ -16,6 +21,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_w5wk0")
+secrets = SubResource("Resource_wju3u")
 message = ExtResource("3_4a3wp")
 session_scene = ExtResource("4_qolas")
 
@@ -111,8 +117,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 566.0
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 
