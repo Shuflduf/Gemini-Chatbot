@@ -1,7 +1,7 @@
 class_name Session
 extends PanelContainer
 
-signal loaded
+signal loaded(index)
 
 var conversation: Array = []
 
@@ -28,4 +28,4 @@ func append(data: Dictionary):
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_mask == MOUSE_BUTTON_LEFT:
-			loaded.emit()
+			loaded.emit(get_index())
