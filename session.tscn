@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0srqe8c5pob6"]
+
+[ext_resource type="Script" path="res://session.gd" id="1_61g11"]
+
+[node name="Session" type="PanelContainer"]
+script = ExtResource("1_61g11")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "THINGY"
+horizontal_alignment = 1

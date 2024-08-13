@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://rdkn0t7jppmy"]
+[gd_scene load_steps=7 format=3 uid="uid://rdkn0t7jppmy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
 [ext_resource type="Resource" uid="uid://brg17xeul0rbs" path="res://my_secrets.tres" id="2_pxsef"]
 [ext_resource type="PackedScene" uid="uid://biydpo1sbys8r" path="res://message.tscn" id="3_4a3wp"]
 [ext_resource type="FontFile" uid="uid://dr4ky20okhwgl" path="res://assets/fonts/Normal.ttf" id="4_m0urx"]
+[ext_resource type="PackedScene" uid="uid://b0srqe8c5pob6" path="res://session.tscn" id="4_qolas"]
 [ext_resource type="Script" path="res://MDtoBB.gd" id="4_utbt8"]
 
 [node name="Control" type="HBoxContainer"]
@@ -17,6 +18,7 @@ size_flags_vertical = 3
 script = ExtResource("1_w5wk0")
 secrets = ExtResource("2_pxsef")
 message = ExtResource("3_4a3wp")
+session_scene = ExtResource("4_qolas")
 
 [node name="MDtoBB" type="Node" parent="."]
 script = ExtResource("4_utbt8")
@@ -73,7 +75,13 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Sessions" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 15

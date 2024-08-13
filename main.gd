@@ -1,9 +1,11 @@
 extends Control
 
+@onready var sessions: VBoxContainer = %Sessions
 @onready var md_bb: MDtoBB = $MDtoBB
 @onready var request: HTTPRequest = $HTTPRequest
 @export var secrets: Secrets
 @export var message: PackedScene
+@export var session_scene: PackedScene
 var model = "gemini-1.5-flash"
 
 var response_text:
@@ -11,17 +13,16 @@ var response_text:
 		response_text = value
 		add_message(true, value)
 
-var conversation: Array[Dictionary]
+var session: Session
 
-func _ready() -> void:
-	conversation = []
+#func _ready() -> void:
+	#conversation = []
 
 
 func add_message(bot: bool, message_text: String):
 	var new_message: Control = message.instantiate()
 	new_message.bot = bot
 	%Messages.add_child(new_message)
-
 
 	new_message.label.text = md_bb.md_to_bb(message_text)
 
@@ -34,11 +35,17 @@ func scroll_down():
 			%ScrollContainer.get_v_scroll_bar().max_value
 
 func ask(prompt: String) -> void:
+
+	if session == null:
+		session = session_scene.instantiate()
+		sessions.add_child(session)
+
+
 	var url = \
 			"https://generativelanguage.googleapis.com/v1beta/models/" \
 			+ model + ":generateContent?key=" + secrets.api_key
 
-	conversation.append({
+	session.append({
 			"role": "user",
 
 			"parts": [{
@@ -48,7 +55,7 @@ func ask(prompt: String) -> void:
 
 
 	var content = {
-		"contents": conversation,
+		"contents": session.load_conv(),
 
 		"safety_settings": [
 			{
@@ -79,7 +86,7 @@ func ask(prompt: String) -> void:
 
 	await request.request_completed
 
-	conversation.append({
+	session.append({
 			"role": "model",
 
 			"parts": [{
