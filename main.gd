@@ -165,13 +165,22 @@ func ask(prompt: String) -> void:
 
 
 func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
-		var data = JSON.parse_string(body.get_string_from_utf8())
-		FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
+	var data: Dictionary = JSON.parse_string(body.get_string_from_utf8())
+	FileAccess.open("save.json", FileAccess.WRITE).store_buffer(body)
+
+	if data.has("error"):
+		response_text = \
+				"Error " + str(data["error"]["code"]) + ": " + data["error"]["message"]
+		if data["error"]["code"] == 400:
+			%APILineEdit.text = ""
+			$ApiKeyPopup.show()
+	else:
 		response_text = data["candidates"][0]["content"]["parts"][0]["text"]
 
 
 func _on_line_edit_text_submitted(new_text: String):
 	%LineEdit.text = ""
+
 	if secrets.api_key.is_empty():
 		$ApiKeyPopup.show()
 		return

@@ -1,39 +1,39 @@
 {
   "candidates": [
-    {
-      "content": {
-        "parts": [
-          {
-            "text": "Please tell me more about what you're interested in!  \"Wow things\" is a bit vague. \n\nFor example, you could tell me:\n\n* **What kind of things do you find \"wow\"?** Are you interested in nature, technology, art, music, food, or something else?\n* **What kind of \"wow\" are you looking for?** Do you want to be amazed, inspired, or entertained?\n\nOnce I know what you're looking for, I can give you some specific and exciting recommendations. \n"
-          }
-        ],
-        "role": "model"
-      },
-      "finishReason": "STOP",
-      "index": 0,
-      "safetyRatings": [
-        {
-          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_HATE_SPEECH",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_HARASSMENT",
-          "probability": "NEGLIGIBLE"
-        },
-        {
-          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-          "probability": "NEGLIGIBLE"
-        }
-      ]
-    }
+	{
+	  "content": {
+		"parts": [
+		  {
+			"text": "Hello! How can I help you today? \n"
+		  }
+		],
+		"role": "model"
+	  },
+	  "finishReason": "STOP",
+	  "index": 0,
+	  "safetyRatings": [
+		{
+		  "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+		  "probability": "NEGLIGIBLE"
+		},
+		{
+		  "category": "HARM_CATEGORY_HATE_SPEECH",
+		  "probability": "NEGLIGIBLE"
+		},
+		{
+		  "category": "HARM_CATEGORY_HARASSMENT",
+		  "probability": "NEGLIGIBLE"
+		},
+		{
+		  "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+		  "probability": "NEGLIGIBLE"
+		}
+	  ]
+	}
   ],
   "usageMetadata": {
-    "promptTokenCount": 3,
-    "candidatesTokenCount": 112,
-    "totalTokenCount": 115
+	"promptTokenCount": 24,
+	"candidatesTokenCount": 10,
+	"totalTokenCount": 34
   }
 }

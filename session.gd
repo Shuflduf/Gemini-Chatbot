@@ -12,11 +12,9 @@ func _ready() -> void:
 
 func change_border(colour: Color):
 	var new_panel = get_theme_stylebox("panel").duplicate()
-	#print(new_panel.bg_color)
 	new_panel.border_color = colour
 	new_panel.border_color.a = 0.302
 	add_theme_stylebox_override("panel", new_panel)
-	#print(new_panel.bg_color)
 
 
 func save_conv():

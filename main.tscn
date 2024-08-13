@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://rdkn0t7jppmy"]
+[gd_scene load_steps=12 format=3 uid="uid://rdkn0t7jppmy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
 [ext_resource type="Script" path="res://secrets.gd" id="2_2qk1t"]
@@ -7,12 +7,35 @@
 [ext_resource type="PackedScene" uid="uid://b0srqe8c5pob6" path="res://session.tscn" id="4_qolas"]
 [ext_resource type="Script" path="res://MDtoBB.gd" id="4_utbt8"]
 [ext_resource type="FontFile" uid="uid://ckwie38c0g5xw" path="res://assets/fonts/Bold.ttf" id="7_t2few"]
+[ext_resource type="Shader" path="res://main.gdshader" id="8_06orj"]
 
 [sub_resource type="Resource" id="Resource_wju3u"]
 script = ExtResource("2_2qk1t")
 api_key = ""
 
-[node name="Control" type="HBoxContainer"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l1xoe"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xxe7q"]
+shader = ExtResource("8_06orj")
+shader_parameter/color_gap = Color(0.16, 0.16, 0.16, 0.501961)
+shader_parameter/color_stripe = Color(0, 0, 0, 0.5)
+shader_parameter/divisions = 24.1
+shader_parameter/stripe_bias = 2.0
+shader_parameter/speed = 0.02
+shader_parameter/angle = 45.965
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="HBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,104 +48,25 @@ secrets = SubResource("Resource_wju3u")
 message = ExtResource("3_4a3wp")
 session_scene = ExtResource("4_qolas")
 
-[node name="MDtoBB" type="Node" parent="."]
-script = ExtResource("4_utbt8")
-
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
-
-[node name="MainBody" type="MarginContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainBody"]
-layout_mode = 2
-alignment = 1
-
-[node name="Messages" type="MarginContainer" parent="MainBody/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 45
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MainBody/VBoxContainer/Messages"]
-unique_name_in_owner = true
-clip_contents = false
-layout_mode = 2
-size_flags_horizontal = 0
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="Messages" type="VBoxContainer" parent="MainBody/VBoxContainer/Messages/ScrollContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 2
-size_flags_vertical = 0
-theme_override_constants/separation = 15
-alignment = 2
-
-[node name="LineEdit" type="LineEdit" parent="MainBody/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("4_m0urx")
-theme_override_font_sizes/font_size = 20
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="NewSession" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("7_t2few")
-text = "New Session"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
-
-[node name="Sessions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Session" parent="MarginContainer/VBoxContainer/ScrollContainer/Sessions" instance=ExtResource("4_qolas")]
-layout_mode = 2
-
-[node name="ApiKeyPopup" type="PopupPanel" parent="."]
+[node name="ApiKeyPopup" type="PopupPanel" parent="Control"]
 title = "Enter API Key"
 initial_position = 2
 size = Vector2i(570, 66)
 borderless = false
 always_on_top = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ApiKeyPopup"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ApiKeyPopup"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 4.0
 offset_top = 4.0
-offset_right = -4.0
-offset_bottom = -4.0
+offset_right = 566.0
+offset_bottom = 62.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LinkButton" type="LinkButton" parent="ApiKeyPopup/VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="Control/ApiKeyPopup/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 tooltip_text = "https://aistudio.google.com/app/apikey"
@@ -131,12 +75,116 @@ theme_override_fonts/font = ExtResource("4_m0urx")
 text = "Get Api Key Here"
 uri = "https://aistudio.google.com/app/apikey"
 
-[node name="APILineEdit" type="LineEdit" parent="ApiKeyPopup/VBoxContainer"]
+[node name="APILineEdit" type="LineEdit" parent="Control/ApiKeyPopup/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 secret = true
 
-[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
-[connection signal="text_submitted" from="MainBody/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/NewSession" to="." method="_on_new_session_pressed"]
-[connection signal="text_submitted" from="ApiKeyPopup/VBoxContainer/APILineEdit" to="." method="_on_api_line_edit_text_submitted"]
+[node name="MDtoBB" type="Node" parent="Control"]
+script = ExtResource("4_utbt8")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Control"]
+
+[node name="MainBody" type="MarginContainer" parent="Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MainBody"]
+layout_mode = 2
+alignment = 1
+
+[node name="Messages" type="MarginContainer" parent="Control/MainBody/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 45
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MainBody/VBoxContainer/Messages"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 0
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="Messages" type="VBoxContainer" parent="Control/MainBody/VBoxContainer/Messages/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="Control/MainBody/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("4_m0urx")
+theme_override_font_sizes/font_size = 20
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="NewSession" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_t2few")
+text = "New Session"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Sessions" type="VBoxContainer" parent="Control/MarginContainer/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Session" parent="Control/MarginContainer/VBoxContainer/ScrollContainer/Sessions" instance=ExtResource("4_qolas")]
+layout_mode = 2
+
+[node name="Colour" type="Panel" parent="."]
+modulate = Color(0.3843, 0.45201, 0.61, 1)
+z_index = -100
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l1xoe")
+
+[node name="Panel" type="Panel" parent="."]
+z_index = -100
+material = SubResource("ShaderMaterial_xxe7q")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="text_submitted" from="Control/ApiKeyPopup/VBoxContainer/APILineEdit" to="Control" method="_on_api_line_edit_text_submitted"]
+[connection signal="request_completed" from="Control/HTTPRequest" to="Control" method="_on_http_request_request_completed"]
+[connection signal="text_submitted" from="Control/MainBody/VBoxContainer/LineEdit" to="Control" method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Control/MarginContainer/VBoxContainer/NewSession" to="Control" method="_on_new_session_pressed"]
