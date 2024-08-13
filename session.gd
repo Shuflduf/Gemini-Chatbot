@@ -46,6 +46,9 @@ func _on_right_click_menu_index_pressed(index: int) -> void:
 		0:
 			$PopupPanel.show()
 			$PopupPanel/LineEdit.text = name
+		1:
+			DirAccess.remove_absolute("user://sessions/" + name + ".json")
+			queue_free()
 
 
 func _on_line_edit_text_submitted(new_text: String) -> void:

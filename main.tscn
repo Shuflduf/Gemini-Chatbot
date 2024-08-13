@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://rdkn0t7jppmy"]
+[gd_scene load_steps=8 format=3 uid="uid://rdkn0t7jppmy"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_w5wk0"]
 [ext_resource type="Resource" uid="uid://brg17xeul0rbs" path="res://my_secrets.tres" id="2_pxsef"]
@@ -6,6 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dr4ky20okhwgl" path="res://assets/fonts/Normal.ttf" id="4_m0urx"]
 [ext_resource type="PackedScene" uid="uid://b0srqe8c5pob6" path="res://session.tscn" id="4_qolas"]
 [ext_resource type="Script" path="res://MDtoBB.gd" id="4_utbt8"]
+[ext_resource type="FontFile" uid="uid://ckwie38c0g5xw" path="res://assets/fonts/Bold.ttf" id="7_t2few"]
 
 [node name="Control" type="HBoxContainer"]
 anchors_preset = 15
@@ -75,19 +76,30 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="NewSession" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_t2few")
+text = "New Session"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="Sessions" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+[node name="Sessions" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Session" parent="MarginContainer/ScrollContainer/Sessions" instance=ExtResource("4_qolas")]
+[node name="Session" parent="MarginContainer/VBoxContainer/ScrollContainer/Sessions" instance=ExtResource("4_qolas")]
 layout_mode = 2
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="text_submitted" from="MainBody/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NewSession" to="." method="_on_new_session_pressed"]

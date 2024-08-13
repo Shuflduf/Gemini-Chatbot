@@ -38,6 +38,10 @@ func add_sessions() -> void:
 func connect_sessions():
 	for i in sessions.get_child_count():
 		var c = sessions.get_child(i)
+
+		if !c.get_signal_connection_list("tree_exited"):
+			c.tree_exited.connect(connect_sessions)
+
 		if c.get_signal_connection_list("loaded"):
 			c.disconnect("loaded", _connect_single_session)
 		c.loaded.connect(_connect_single_session)
@@ -146,8 +150,18 @@ func _on_line_edit_text_submitted(new_text: String):
 	%LineEdit.text = ""
 	add_message(false, new_text + "\n")
 
+	sessions.move_child(session, 0)
+
 	await ask(new_text)
 
 
 
 
+
+
+func _on_new_session_pressed() -> void:
+	session = session_scene.instantiate()
+	sessions.add_child(session, true)
+	sessions.move_child(session, 0)
+	connect_sessions()
+	replace_all_messages(0)
