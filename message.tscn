@@ -24,11 +24,13 @@ expand_margin_right = 32.0
 
 [node name="Message" type="PanelContainer"]
 size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ll726")
 script = ExtResource("1_5p3jy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 8
 theme_override_constants/separation = 40
 
 [node name="Panel" type="Panel" parent="HBoxContainer"]
@@ -40,12 +42,19 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_h558b")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 6
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("2_eaara")
 theme_override_fonts/bold_font = ExtResource("3_5futn")
 theme_override_fonts/italics_font = ExtResource("4_tfpyr")
 theme_override_fonts/bold_italics_font = ExtResource("5_7qlm6")
 theme_override_fonts/mono_font = ExtResource("6_3qntq")
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
 bbcode_enabled = true
 text = "gggggg"
 fit_content = true
+context_menu_enabled = true

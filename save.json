@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "You got it! Here's how to create strikethrough text in Markdown:\n\n```markdown\n~~Strikethrough text~~\n```\n\n**Example:**\n\nThis is some ~normal text~ that has been struck through. \n\n**Output:**\n\nThis is some normal text that has been struck through. \n"
+            "text": "## The Weaver's Song\n\nThe loom of life, a tapestry so grand,\nWhere threads of joy and sorrow intertwine,\nA vibrant dance of colours, hand in hand,\nA masterpiece in progress, line by line.\n\nThe warp, a steady rhythm, strong and true,\nThe threads of time, unyielding, ever flowing,\nEach moment woven, a unique hue,\nThe past, the present, in its dance bestowing.\n\nThe weft, a delicate, shifting, fleeting breeze,\nOf dreams and aspirations, hopes and fears,\nIt weaves a pattern, through the rustling trees,\nA tapestry of stories, whispered through the years.\n\nThe weaver's hand, a skillful, gentle guide,\nWith every thread, a choice, a path to take,\nThrough triumphs, trials, where we choose to stride,\nThe tapestry unfolds, a story to partake.\n\nThe threads of love, a crimson, burning bright,\nEmbracing hearts, with warmth and tenderness,\nThe threads of pain, a shadowed, mournful night,\nA reminder of fragility, a solemn mess.\n\nThe threads of laughter, silver, ringing clear,\nEchoing joy, in whispers and in shouts,\nThe threads of tears, a glistening, salty tear,\nA cleansing rain, that washes fear and doubts.\n\nAnd as the tapestry grows, a masterpiece unfolds,\nWith every thread, a story, a lesson learned,\nOf lives that blossom, and of tales untold,\nA testament to beauty, fiercely earned.\n\nThe weaver's song, a symphony divine,\nA melody of moments, fleeting yet profound,\nA testament to life, in every line,\nA tapestry of souls, forever intertwined.\n\nThrough changing seasons, the loom continues to sway,\nThe weaver's hand, tireless, weaves the day,\nFrom dawn to dusk, the threads forever play,\nThe tapestry of life, in its endless display.\n\nSo let us cherish, every thread, every hue,\nFor in the grand design, our story is true,\nA symphony of moments, forever new,\nA woven masterpiece, forever me and you. \n"
           }
         ],
         "role": "model"
@@ -32,8 +32,8 @@
     }
   ],
   "usageMetadata": {
-    "promptTokenCount": 6,
-    "candidatesTokenCount": 62,
-    "totalTokenCount": 68
+    "promptTokenCount": 5,
+    "candidatesTokenCount": 447,
+    "totalTokenCount": 452
   }
 }

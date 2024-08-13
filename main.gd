@@ -17,8 +17,6 @@ func _ready() -> void:
 	conversation = []
 
 
-
-
 func add_message(bot: bool, message_text: String):
 	var new_message: Control = message.instantiate()
 	new_message.bot = bot
