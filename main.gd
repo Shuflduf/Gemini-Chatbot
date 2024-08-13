@@ -2,9 +2,9 @@ extends Control
 
 @onready var sessions: VBoxContainer = %Sessions
 @onready var messages: VBoxContainer = %Messages
-
 @onready var md_bb: MDtoBB = $MDtoBB
 @onready var request: HTTPRequest = $HTTPRequest
+
 @export var secrets: Secrets
 @export var message: PackedScene
 @export var session_scene: PackedScene
@@ -18,11 +18,8 @@ var response_text:
 var session: Session
 
 func _ready() -> void:
-	#secrets = Secrets.new()
-	#if DirAccess.exi
 	if FileAccess.file_exists("user://key"):
 		secrets.api_key = FileAccess.open("user://key", FileAccess.READ).get_as_text()
-	print(secrets.api_key)
 	if secrets.api_key.is_empty():
 		$ApiKeyPopup.show()
 	add_sessions()
@@ -58,8 +55,6 @@ func connect_sessions():
 		var c = sessions.get_child(i)
 
 		if !c.get_signal_connection_list("tree_exited"):
-			#if sessions.get_child_count() <= 1:
-
 			c.tree_exited.connect(func():
 				for m in messages.get_children():
 					m.queue_free()
@@ -71,7 +66,14 @@ func connect_sessions():
 		c.loaded.connect(_connect_single_session)
 
 
+func select_session(index: int):
+	for i in sessions.get_children():
+		i.change_border(Color.BLACK)
+
+	sessions.get_child(index).change_border(Color.WHITE)
+
 func _connect_single_session(index: int):
+	select_session(index)
 	session = sessions.get_child(index)
 	replace_all_messages(index)
 
@@ -189,6 +191,7 @@ func _on_new_session_pressed() -> void:
 	session = session_scene.instantiate()
 	sessions.add_child(session, true)
 	sessions.move_child(session, 0)
+	select_session(0)
 	connect_sessions()
 	replace_all_messages(0)
 

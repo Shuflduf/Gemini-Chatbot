@@ -10,6 +10,14 @@ var conversation: Array = []
 func _ready() -> void:
 	$Label.text = name
 
+func change_border(colour: Color):
+	var new_panel = get_theme_stylebox("panel").duplicate()
+	#print(new_panel.bg_color)
+	new_panel.border_color = colour
+	new_panel.border_color.a = 0.302
+	add_theme_stylebox_override("panel", new_panel)
+	#print(new_panel.bg_color)
+
 
 func save_conv():
 	var file = FileAccess.open("user://sessions/" + name + ".json", FileAccess.WRITE)

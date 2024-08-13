@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "Orange is a vibrant color associated with:\n\n* **Fruit:**  The most common association is with the juicy citrus fruit.\n* **Sunrise & Sunset:** The warm hues of orange evoke feelings of dawn and dusk.\n* **Fall:** The changing leaves in autumn often display brilliant orange shades.\n* **Energy & Enthusiasm:** Orange is often used to represent vitality, creativity, and excitement.\n* **Warmth & Comfort:** The color can also evoke feelings of coziness and homeliness.\n\nWhat would you like to know about orange? \n"
+            "text": "Please tell me more about what you're interested in!  \"Wow things\" is a bit vague. \n\nFor example, you could tell me:\n\n* **What kind of things do you find \"wow\"?** Are you interested in nature, technology, art, music, food, or something else?\n* **What kind of \"wow\" are you looking for?** Do you want to be amazed, inspired, or entertained?\n\nOnce I know what you're looking for, I can give you some specific and exciting recommendations. \n"
           }
         ],
         "role": "model"
@@ -32,8 +32,8 @@
     }
   ],
   "usageMetadata": {
-    "promptTokenCount": 2,
+    "promptTokenCount": 3,
     "candidatesTokenCount": 112,
-    "totalTokenCount": 114
+    "totalTokenCount": 115
   }
 }
