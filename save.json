@@ -4,7 +4,7 @@
 			"content": {
 				"parts": [
 					{
-						"text": "Please provide me with more context or information. What would you like me to do with \"fghfgh\"? \n\nFor example:\n\n* **Are you trying to spell a word?** If so, please tell me the word you're trying to spell.\n* **Are you looking for a definition?** If so, please tell me what you want to know the definition of.\n* **Are you asking a question?** If so, please ask your question.\n\nI'm here to help! \n"
+						"text": "That's great to hear! I'm glad you're doing well. Is there anything I can help you with today? \n"
 					}
 				],
 				"role": "model"
@@ -33,7 +33,7 @@
 	],
 	"usageMetadata": {
 		"promptTokenCount": 5,
-		"candidatesTokenCount": 107,
-		"totalTokenCount": 112
+		"candidatesTokenCount": 27,
+		"totalTokenCount": 32
 	}
 }

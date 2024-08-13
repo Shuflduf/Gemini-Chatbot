@@ -3,6 +3,8 @@ extends PanelContainer
 
 signal loaded(index)
 
+@onready var right_click_menu: PopupMenu = $RightClickMenu
+
 var conversation: Array = []
 
 func _ready() -> void:
@@ -27,5 +29,30 @@ func append(data: Dictionary):
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.button_mask == MOUSE_BUTTON_LEFT:
-			loaded.emit(get_index())
+		if event.pressed:
+			if event.button_mask == MOUSE_BUTTON_LEFT:
+				loaded.emit(get_index())
+			if event.button_mask == MOUSE_BUTTON_RIGHT:
+				right_click_menu.position = event.global_position - Vector2(10, 10)
+				right_click_menu.show()
+
+
+func _on_right_click_menu_mouse_exited() -> void:
+	right_click_menu.hide()
+
+
+func _on_right_click_menu_index_pressed(index: int) -> void:
+	match index:
+		0:
+			$PopupPanel.show()
+			$PopupPanel/LineEdit.text = name
+
+
+func _on_line_edit_text_submitted(new_text: String) -> void:
+	DirAccess.remove_absolute("user://sessions/" + name + ".json")
+	if new_text.is_empty():
+		return
+	name = new_text
+	$PopupPanel.hide()
+	$Label.text = new_text
+	save_conv()
