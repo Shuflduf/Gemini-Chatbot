@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "# Heading 1 markdown \n"
+            "text": "You're right! To display code within markdown, we use backticks. Here's how it works:\n\n**For single-line code:**\n\n```\nThis is a line of code.\n```\n\n**For multi-line code blocks:**\n\n```python\ndef my_function():\n  print(\"Hello, world!\")\n\nmy_function()\n```\n\n**Explanation:**\n\n* **Triple backticks (```)**:  These mark the beginning and end of a code block.\n* **Language identifier (optional)**:  After the opening triple backticks, you can specify the programming language (e.g., `python`, `javascript`, `html`, etc.). This helps with syntax highlighting and formatting.\n\nLet me know if you have any other code you want me to help you display! \n"
           }
         ],
         "role": "model"
@@ -32,8 +32,8 @@
     }
   ],
   "usageMetadata": {
-    "promptTokenCount": 6,
-    "candidatesTokenCount": 5,
-    "totalTokenCount": 11
+    "promptTokenCount": 87,
+    "candidatesTokenCount": 167,
+    "totalTokenCount": 254
   }
 }

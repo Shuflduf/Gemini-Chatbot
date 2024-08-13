@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://biydpo1sbys8r"]
+[gd_scene load_steps=9 format=3 uid="uid://biydpo1sbys8r"]
 
 [ext_resource type="Script" path="res://message.gd" id="1_5p3jy"]
+[ext_resource type="FontFile" uid="uid://dr4ky20okhwgl" path="res://assets/fonts/Normal.ttf" id="2_eaara"]
+[ext_resource type="FontFile" uid="uid://ckwie38c0g5xw" path="res://assets/fonts/Bold.ttf" id="3_5futn"]
+[ext_resource type="FontFile" uid="uid://bst7ji88pe3jw" path="res://assets/fonts/Italic.ttf" id="4_tfpyr"]
+[ext_resource type="FontFile" uid="uid://fc808t2ctkiv" path="res://assets/fonts/BoldItalic.ttf" id="5_7qlm6"]
+[ext_resource type="FontFile" uid="uid://chc5l82bmn3vi" path="res://assets/fonts/Mono.ttf" id="6_3qntq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ll726"]
 bg_color = Color(0.241156, 0.241156, 0.241156, 0.670588)
@@ -36,6 +41,11 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_fonts/normal_font = ExtResource("2_eaara")
+theme_override_fonts/bold_font = ExtResource("3_5futn")
+theme_override_fonts/italics_font = ExtResource("4_tfpyr")
+theme_override_fonts/bold_italics_font = ExtResource("5_7qlm6")
+theme_override_fonts/mono_font = ExtResource("6_3qntq")
 bbcode_enabled = true
 text = "gggggg"
 fit_content = true
