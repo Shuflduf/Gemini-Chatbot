@@ -11,6 +11,7 @@ func md_to_bb(markdown_text: String) -> String:
 	bb_string = bold(bb_string)
 	bb_string = italic(bb_string)
 	bb_string = heading(bb_string)
+	bb_string = strike_through(bb_string)
 
 	return bb_string
 
@@ -18,7 +19,7 @@ func code(markdown_code_text: String) -> String:
 
 	var bb_string = markdown_code_text
 
-	for i in ceil(bb_string.count("`") / 2.0):
+	for i in floor(bb_string.count("`") / 2.0):
 
 		var start = bb_string.findn("`")
 		bb_string = bb_string.erase(start, 1)
@@ -34,7 +35,7 @@ func bold(markdown_bold_text: String) -> String:
 
 	var bb_string = markdown_bold_text
 
-	for i in ceil(bb_string.count("**") / 2.0):
+	for i in floor(bb_string.count("**") / 2.0):
 		var start = bb_string.findn("**")
 		var end = bb_string.findn("**", start + 1)
 		bb_string = bb_string.erase(start, 2)
@@ -48,7 +49,7 @@ func italic(markdown_italic_text: String) -> String:
 
 	var bb_string = markdown_italic_text
 
-	for i in ceil(bb_string.count("*") / 2.0):
+	for i in floor(bb_string.count("*") / 2.0):
 		var start = bb_string.findn("*")
 		var end = bb_string.findn("*", start + 1)
 		bb_string = bb_string.erase(start, 1)
@@ -65,5 +66,19 @@ func heading(markdown_heading_text: String) -> String:
 		bb_string = bb_string.erase(0, 2)
 		bb_string = bb_string.insert(0, "[font_size=30]")
 		bb_string = bb_string.insert(bb_string.find("\n", 1), "[/font_size]")
+
+	return bb_string
+
+func strike_through(markdown_striked_text: String) -> String:
+
+	var bb_string = markdown_striked_text
+
+	for i in floor(bb_string.count("~~") / 2.0):
+		var start = bb_string.findn("~~")
+		var end = bb_string.findn("~~", start + 1)
+		bb_string = bb_string.erase(start, 2)
+		bb_string = bb_string.insert(start, "[s]")
+		bb_string = bb_string.erase(end + 1, 2)
+		bb_string = bb_string.insert(end + 1, "[/s]")
 
 	return bb_string
