@@ -8,6 +8,7 @@ signal loaded(index)
 var conversation: Array = []
 
 func _ready() -> void:
+	DirAccess.make_dir_absolute("user://sessions")
 	$Label.text = name
 
 func change_border(colour: Color):

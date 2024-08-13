@@ -1,3 +1,4 @@
 # Godot 4+ specific ignores
 .godot/
-my_secrets.tres
+exports/
+
