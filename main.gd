@@ -18,7 +18,24 @@ var response_text:
 var session: Session
 
 func _ready() -> void:
+	secrets = Secrets.new()
+	#if DirAccess.exi
+	if FileAccess.file_exists("user://key".get_base_dir()):
+		secrets.api_key = FileAccess.open("user://key", FileAccess.READ).get_as_text()
+	print(secrets.api_key)
+	if secrets.api_key.is_empty():
+		$ApiKeyPopup.show()
 	add_sessions()
+
+
+func _on_api_line_edit_text_submitted(new_text: String) -> void:
+	if new_text.is_empty():
+		return
+
+	secrets = Secrets.new()
+	secrets.api_key = new_text
+	$ApiKeyPopup.hide()
+
 
 func add_sessions() -> void:
 	for i in sessions.get_children():
@@ -145,18 +162,20 @@ func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) 
 
 
 func _on_line_edit_text_submitted(new_text: String):
+	%LineEdit.text = ""
+	if secrets.api_key.is_empty():
+		$ApiKeyPopup.show()
+		return
+
+
 	if new_text.is_empty():
 		return
-	%LineEdit.text = ""
+
 	add_message(false, new_text + "\n")
 
 	sessions.move_child(session, 0)
 
 	await ask(new_text)
-
-
-
-
 
 
 func _on_new_session_pressed() -> void:
@@ -165,3 +184,6 @@ func _on_new_session_pressed() -> void:
 	sessions.move_child(session, 0)
 	connect_sessions()
 	replace_all_messages(0)
+
+
+
