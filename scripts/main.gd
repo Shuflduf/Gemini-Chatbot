@@ -20,6 +20,20 @@ var session: Session
 func _ready() -> void:
 	if FileAccess.file_exists("user://key"):
 		secrets.api_key = FileAccess.open("user://key", FileAccess.READ).get_as_text()
+
+	if FileAccess.file_exists("user://colour.txt"):
+		var col_str = FileAccess.open("user://colour.txt", FileAccess.READ).get_as_text()
+		col_str = col_str.lstrip("(").rstrip(")")
+		var col_arr = col_str.split(", ")
+		print(col_arr)
+		var new_col = Color(\
+				float(col_arr[0]), \
+				float(col_arr[1]), \
+				float(col_arr[2]), 1.0
+			)
+		$"../Colour".modulate = new_col
+		$Info/VBoxContainer/HBoxContainer2/ColorPickerButton.color = new_col
+
 	if secrets.api_key.is_empty():
 		$ApiKeyPopup.show()
 	add_sessions()
@@ -224,3 +238,8 @@ func _on_info_close_requested() -> void:
 
 func _on_rich_text_label_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	FileAccess.open("user://colour.txt", FileAccess.WRITE).store_string(str(color))
+	$"../Colour".modulate = color

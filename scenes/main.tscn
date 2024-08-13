@@ -172,8 +172,8 @@ layout_mode = 2
 [node name="Info" type="Window" parent="Control"]
 title = "Settings"
 initial_position = 1
-size = Vector2i(475, 100)
-visible = false
+size = Vector2i(475, 130)
+unresizable = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/Info"]
 anchors_preset = 15
@@ -203,12 +203,29 @@ theme_override_fonts/font = ExtResource("4_m0urx")
 text = "Enter API Key  "
 
 [node name="SettingsLineEdit" type="LineEdit" parent="Control/Info/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(336.275, 0)
+custom_minimum_size = Vector2(325, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_fonts/font = ExtResource("4_m0urx")
 secret = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/Info/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="Control/Info/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_m0urx")
+text = "Change Colour   
+"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="Control/Info/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(319.325, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+edit_alpha = false
 
 [node name="Colour" type="Panel" parent="."]
 modulate = Color(0.3843, 0.45201, 0.61, 1)
@@ -241,3 +258,4 @@ mouse_filter = 2
 [connection signal="close_requested" from="Control/Info" to="Control" method="_on_info_close_requested"]
 [connection signal="meta_clicked" from="Control/Info/VBoxContainer/RichTextLabel" to="Control" method="_on_rich_text_label_meta_clicked"]
 [connection signal="text_submitted" from="Control/Info/VBoxContainer/HBoxContainer/SettingsLineEdit" to="Control" method="_on_settings_line_edit_text_submitted"]
+[connection signal="color_changed" from="Control/Info/VBoxContainer/HBoxContainer2/ColorPickerButton" to="Control" method="_on_color_picker_button_color_changed"]
