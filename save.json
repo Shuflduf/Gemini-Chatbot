@@ -1,39 +1,39 @@
 {
-  "candidates": [
-	{
-	  "content": {
-		"parts": [
-		  {
-			"text": "You told me your cat's name is Alexa!  🐈\u200d⬛ \n\nDo you want to talk about Alexa? I'm happy to chat about your furry friend! 😊 \n"
-		  }
-		],
-		"role": "model"
-	  },
-	  "finishReason": "STOP",
-	  "index": 0,
-	  "safetyRatings": [
+	"candidates": [
 		{
-		  "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-		  "probability": "NEGLIGIBLE"
-		},
-		{
-		  "category": "HARM_CATEGORY_HATE_SPEECH",
-		  "probability": "NEGLIGIBLE"
-		},
-		{
-		  "category": "HARM_CATEGORY_HARASSMENT",
-		  "probability": "NEGLIGIBLE"
-		},
-		{
-		  "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-		  "probability": "NEGLIGIBLE"
+			"content": {
+				"parts": [
+					{
+						"text": "Hello! 👋  \n\nIt seems like you're just testing things out.  Is there anything specific you'd like to chat about or ask me? I'm here and ready to help!  😊 \n"
+					}
+				],
+				"role": "model"
+			},
+			"finishReason": "STOP",
+			"index": 0,
+			"safetyRatings": [
+				{
+					"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+					"probability": "NEGLIGIBLE"
+				},
+				{
+					"category": "HARM_CATEGORY_HATE_SPEECH",
+					"probability": "NEGLIGIBLE"
+				},
+				{
+					"category": "HARM_CATEGORY_HARASSMENT",
+					"probability": "NEGLIGIBLE"
+				},
+				{
+					"category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+					"probability": "NEGLIGIBLE"
+				}
+			]
 		}
-	  ]
+	],
+	"usageMetadata": {
+		"promptTokenCount": 471,
+		"candidatesTokenCount": 43,
+		"totalTokenCount": 514
 	}
-  ],
-  "usageMetadata": {
-	"promptTokenCount": 410,
-	"candidatesTokenCount": 37,
-	"totalTokenCount": 447
-  }
 }

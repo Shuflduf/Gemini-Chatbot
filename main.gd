@@ -34,14 +34,17 @@ func add_sessions() -> void:
 		sessions.add_child(new_session)
 
 	for i in sessions.get_child_count():
-		sessions.get_child(i).loaded.connect(func(): replace_all_messages(i))
+		sessions.get_child(i).loaded.connect(func():
+			session = sessions.get_child(i)
+			replace_all_messages(i))
 
 func replace_all_messages(index):
 	for i in messages.get_children():
 		i.free()
 
 	for i in sessions.get_child(index).conversation:
-		print(i["parts"])
+		var bot = true if i["role"] == "model" else false
+		add_message(bot, i["parts"][0]["text"])
 
 
 func add_message(bot: bool, message_text: String):
@@ -111,13 +114,14 @@ func ask(prompt: String) -> void:
 
 	await request.request_completed
 
-	session.append({
-			"role": "model",
+	session.conversation = session.load_conv() + [{
+		"role": "model",
 
-			"parts": [{
-				"text": response_text,
-			}]}
-		)
+		"parts": [{
+			"text": response_text,
+		}]}]
+
+	session.save_conv()
 
 
 func _on_http_request_request_completed(_r, _r_code, _h, body: PackedByteArray) -> void:
